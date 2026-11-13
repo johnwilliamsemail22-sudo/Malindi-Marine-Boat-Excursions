@@ -604,9 +604,13 @@
 <div class="bookbar"><a class="btn btn-primary" href="#book">Book your excursion</a></div>
 
 <script>
-  // curtain
-  addEventListener('load', () => document.getElementById('curtain').classList.add('gone'));
-  setTimeout(() => document.getElementById('curtain').classList.add('gone'), 2200);
+  // curtain: hold until hero image is decoded, then reveal
+  const curtain = document.getElementById('curtain');
+  function revealCurtain() { curtain.classList.add('gone'); }
+  const heroImg = new Image();
+  heroImg.src = '/assets/ocean_boat.webp';
+  heroImg.decode().then(revealCurtain).catch(revealCurtain);
+  setTimeout(revealCurtain, 3500); // safety net
 
   // nav
   const nav = document.getElementById('topnav');
