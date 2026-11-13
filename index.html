@@ -12,7 +12,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://malindi-marine-boat-excursions.vercel.app/assets/ocean_boat.webp" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="preload" as="image" href="/assets/ocean_boat.webp" fetchpriority="high" />
+<link rel="preload" as="image" href="/assets/ocean_pure.webp" fetchpriority="high" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300&family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
@@ -68,7 +68,7 @@
     position: sticky; top: 0; height: 100svh; overflow: hidden;
     will-change: transform, opacity;
   }
-  .flyer-bg { position: absolute; inset: 0; opacity: 0; transform: scale(1.14); transition: opacity 1.3s ease .1s, transform 1.8s cubic-bezier(.2,.8,.2,1) .1s; }
+  .flyer-bg { position: absolute; inset: 0; opacity: 0; transform: scale(1.14); transition: opacity 1.3s ease .1s, transform 1.8s cubic-bezier(.2,.8,.2,1) .1s; background: url('/assets/ocean_pure.webp') center/cover no-repeat; }
   body.ready .flyer-bg { opacity: 1; transform: none; }
   .bg-par { position: absolute; inset: -3%; will-change: transform; }
   .flyer-bg img { width: 100%; height: 100%; object-fit: cover; animation: kenburns 26s ease-in-out infinite alternate; }
@@ -81,7 +81,7 @@
     line-height: .85; letter-spacing: -.01em; text-transform: uppercase;
     color: transparent;
     -webkit-background-clip: text; background-clip: text;
-    background-image: url('/assets/ocean_boat.webp');
+    background-image: url('/assets/ocean_pure.webp');
     background-size: 170% 170%;
     background-position: 80% 15%;
     -webkit-text-stroke: 3px rgba(255,255,255,.95); filter: drop-shadow(0 2px 18px rgba(4,18,30,.4));
@@ -118,7 +118,7 @@
   .flyer-foot .strong { font-family: 'Anton', sans-serif; font-size: 1.05rem; letter-spacing: .06em; color: #fff; }
   @media (max-width: 700px) {
     .flyer-title { font-size: clamp(3.4rem, 19vw, 6rem); -webkit-text-stroke: 2px rgba(255,255,255,.95); }
-    .flyer-boat { top: 64%; height: 40svh; transform: translate(-50%, -22%); }
+    .flyer-boat { top: 59%; height: 44svh; transform: translate(-50%, -26%); }
     .flyer-btns { bottom: 19svh; }
     .flyer-foot { bottom: calc(2.5svh + 70px); font-size: .66rem; }
   }
@@ -400,7 +400,7 @@
 <!-- HERO: flyer-style landing -->
 <header class="hero" id="top">
   <div class="flyer" id="flyer">
-    <div class="flyer-bg"><div class="bg-par" id="bgPar"><img src="/assets/ocean_boat.webp" alt="" fetchpriority="high" /></div></div>
+    <div class="flyer-bg"><div class="bg-par" id="bgPar"><img src="/assets/ocean_pure.webp" alt="" fetchpriority="high" /></div></div>
     <h1 class="flyer-title"><span class="line"><span>IT'S</span></span><span class="line"><span>TODAY</span></span></h1>
     <div class="flyer-boat" id="boatWrap"><div class="boat-par" id="boatPar"><img src="/assets/boat_alpha.webp" alt="Aerial view of our dhow on the open water" /></div></div>
     <div class="flyer-btns">
@@ -664,7 +664,7 @@
     setTimeout(() => curtain.remove(), 1100);
   }
   const heroImg = new Image();
-  heroImg.src = '/assets/ocean_boat.webp';
+  heroImg.src = '/assets/ocean_pure.webp';
   if (reducedMotion) { liftCurtain(); }
   else { heroImg.decode().then(() => setTimeout(liftCurtain, 1350)).catch(liftCurtain); setTimeout(liftCurtain, 3600); }
 
