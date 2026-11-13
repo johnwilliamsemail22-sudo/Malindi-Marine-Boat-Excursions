@@ -48,16 +48,50 @@
   .hero {
     position: relative; height: 200svh; color: var(--foam);
   }
+  /* flyer hero: knockout title over aerial ocean */
+  .flyer {
+    position: relative; height: 100svh; overflow: hidden;
+    background: url('/assets/ocean_boat.jpg') center/cover no-repeat;
+  }
+  .flyer-title {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(4rem, 15vw, 13rem);
+    line-height: .85; letter-spacing: -.01em; text-transform: uppercase;
+    color: transparent;
+    -webkit-background-clip: text; background-clip: text;
+    background-image: url('/assets/ocean_boat.jpg');
+    background-size: 170% 170%;
+    background-position: 80% 15%;
+    -webkit-text-stroke: 3px rgba(255,255,255,.95); filter: drop-shadow(0 2px 18px rgba(4,18,30,.4));
+    z-index: 2;
+  }
+  .flyer-btns { position: absolute; left: 0; right: 0; bottom: 9svh; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; z-index: 4; }
+  .flyer-boat {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -52%);
+    height: 74svh; z-index: 6;
+    filter: drop-shadow(0 24px 50px rgba(0,0,0,.5));
+  }
+  .flyer-boat img { height: 100%; width: auto; display: block; }
+  .flyer-foot {
+    position: absolute; left: 4vw; right: 4vw; bottom: 3.5svh; z-index: 4;
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;
+    font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(234,247,247,.9);
+    text-shadow: 0 1px 10px rgba(4,18,30,.8);
+  }
+  .flyer-foot .strong { font-family: 'Anton', sans-serif; font-size: 1.05rem; letter-spacing: .06em; color: #fff; }
+  @media (max-width: 700px) {
+    .flyer-title { font-size: clamp(4.5rem, 24vw, 8rem); }
+    .flyer-boat { width: 110px; }
+    .flyer-btns { bottom: 12svh; }
+  }
   .hero-pin {
     position: sticky; top: 0; height: 100svh; overflow: hidden; z-index: 2;
     display: flex; flex-direction: column; justify-content: flex-end;
   }
   .hero-bg { position: absolute; inset: -10% 0 0 0; will-change: transform; }
   .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-  .hero::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
-    background: linear-gradient(180deg, rgba(4,18,30,.62) 0%, rgba(4,18,30,.4) 34%, rgba(4,18,30,.82) 66%, rgba(4,18,30,.97) 100%);
-  }
   .hero-inner { position: relative; z-index: 3; width: min(1280px, 92vw); margin: 0 auto; padding-bottom: 9svh; text-shadow: 0 2px 16px rgba(4,18,30,.85); }
   .kicker {
     display: inline-flex; align-items: center; gap: .6em;
@@ -321,20 +355,19 @@
   <a class="btn btn-primary" href="#book">Book now</a>
 </nav>
 
-<!-- HERO: pinned, image zooms as you scroll -->
+<!-- HERO: flyer-style landing -->
 <header class="hero" id="top">
-  <div class="hero-pin">
-    <div class="hero-bg" id="heroBg"><img src="/assets/sandbank_real.jpg" alt="White sandbank in turquoise water, Malindi" /></div>
-    <div class="hero-inner">
-      <div class="kicker">Malindi Marine Park · Kenya Coast</div>
-      <h1>The ocean is<br /><em>calling.</em></h1>
-      <p class="lede">Private dhow excursions through Malindi's coral gardens and sandbanks. Snorkel the reef, feast on a beach BBQ, and let the Indian Ocean do its thing.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#book">Book your trip</a>
-        <a class="btn btn-ghost" href="#packages">See the excursions</a>
-      </div>
+  <div class="flyer">
+    <div class="flyer-title">IT'S<br />TODAY</div>
+    <div class="flyer-boat"><img src="/assets/boat_alpha.png" alt="Aerial view of our dhow on the open water" /></div>
+    <div class="flyer-btns">
+      <a class="btn btn-primary" href="#book">Book your trip</a>
+      <a class="btn btn-ghost" href="#packages">See the excursions</a>
     </div>
-    <div class="scroll-cue">Scroll</div>
+    <div class="flyer-foot">
+      <div class="strong">Malindi Marine<br />Boat Excursions</div>
+      <div>Indian Ocean · Kenya<br />Private dhow trips</div>
+    </div>
   </div>
 </header>
 
@@ -578,7 +611,6 @@
   const nav = document.getElementById('topnav');
   // parallax layers
   const layers = [...document.querySelectorAll('[data-speed]')];
-  const heroBg = document.getElementById('heroBg');
   let ticking = false;
   function onScroll() {
     if (ticking) return; ticking = true;
@@ -586,11 +618,12 @@
       const h = document.documentElement;
       const y = h.scrollTop;
       if (y > 80) nav.classList.add('solid'); else nav.classList.remove('solid');
-      // hero zoom-out + fade
-      if (y < innerHeight * 2) {
+      // hero zoom-out + fade (flyer hero is the background image itself)
+      const flyer = document.querySelector('.flyer');
+      if (flyer && y < innerHeight * 2) {
         const t = Math.min(y / innerHeight, 1);
-        heroBg.style.transform = 'scale(' + (1 + t * .22) + ') translateY(' + (t * 6) + '%)';
-        heroBg.style.opacity = 1 - t * .55;
+        flyer.style.transform = 'scale(' + (1 + t * .18) + ')';
+        flyer.style.opacity = 1 - t * .5;
       }
       layers.forEach(el => {
         const r = el.parentElement.getBoundingClientRect();
