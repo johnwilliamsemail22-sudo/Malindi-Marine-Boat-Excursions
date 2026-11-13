@@ -6,6 +6,7 @@
 <title>Malindi Marine Boat Excursions</title>
 <meta name="description" content="Private dhow excursions in Malindi Marine Park, Kenya. Snorkeling adventures, sandbanks and a full-day island getaway with beach BBQ. Book 1–2 days ahead." />
 <meta name="theme-color" content="#04121e" />
+<link rel="preload" as="image" href="/assets/ocean_boat.webp" fetchpriority="high" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300&family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
@@ -51,7 +52,7 @@
   /* flyer hero: knockout title over aerial ocean */
   .flyer {
     position: relative; height: 100svh; overflow: hidden;
-    background: url('/assets/ocean_boat.jpg') center/cover no-repeat;
+    background: url('/assets/ocean_boat.webp') center/cover no-repeat;
   }
   .flyer-title {
     position: absolute; inset: 0; display: flex; flex-direction: column;
@@ -61,7 +62,7 @@
     line-height: .85; letter-spacing: -.01em; text-transform: uppercase;
     color: transparent;
     -webkit-background-clip: text; background-clip: text;
-    background-image: url('/assets/ocean_boat.jpg');
+    background-image: url('/assets/ocean_boat.webp');
     background-size: 170% 170%;
     background-position: 80% 15%;
     -webkit-text-stroke: 3px rgba(255,255,255,.95); filter: drop-shadow(0 2px 18px rgba(4,18,30,.4));
@@ -359,7 +360,7 @@
 <header class="hero" id="top">
   <div class="flyer">
     <div class="flyer-title">IT'S<br />TODAY</div>
-    <div class="flyer-boat"><img src="/assets/boat_alpha.png" alt="Aerial view of our dhow on the open water" /></div>
+    <div class="flyer-boat"><img src="/assets/boat_alpha.webp" alt="Aerial view of our dhow on the open water" /></div>
     <div class="flyer-btns">
       <a class="btn btn-primary" href="#book">Book your trip</a>
       <a class="btn btn-ghost" href="#packages">See the excursions</a>
@@ -697,6 +698,13 @@
       e.target.reset();
     } catch { msg.textContent = "Couldn't send right now — please try again in a moment."; }
   });
+</script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+  if (window.Lenis && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+  }
 </script>
 </body>
 </html>
